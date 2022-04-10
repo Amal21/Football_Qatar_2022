@@ -5,7 +5,7 @@ import "./App.css";
 import { AiOutlineUnlock,AiOutlineUser,
   AiOutlineHome,AiOutlineTrophy,
   AiOutlineDribbble,AiOutlineCreditCard,
-  AiOutlineEuroCircle } from 'react-icons/ai';
+  AiOutlineEuroCircle,AiOutlineBars } from 'react-icons/ai';
 
 
 import AuthService from "./services/auth.service";
@@ -78,6 +78,14 @@ const App = () => {
             <li className="nav-item nav-link active">
               <Link to={"/mod"} className="nav-link">
                 <AiOutlineEuroCircle /> Paiement
+              </Link>
+            </li>
+          )}
+
+          {showModeratorBoard && (
+            <li className="nav-item nav-link active">
+              <Link to={"/mod"} className="nav-link">
+                <AiOutlineBars /> Billets
               </Link>
             </li>
           )}
