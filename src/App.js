@@ -18,6 +18,7 @@ import BoardUser from "./components/BoardUser";
 import BoardAdmin from "./components/BoardAdmin";
 import AjoutPartie from "./components/AjoutPartie";
 import Billets from "./components/Billets";
+import AffichageBillets from "./components/AffichageBillets";
 
 import EventBus from "./common/EventBus";
 
@@ -84,7 +85,7 @@ const App = () => {
 
           {showModeratorBoard && (
             <li className="nav-item nav-link active">
-              <Link to={"/mod"} className="nav-link">
+              <Link to={"/affichagebillets"} className="nav-link">
                 <AiOutlineBars /> Billets
               </Link>
             </li>
@@ -149,6 +150,8 @@ const App = () => {
 
 
           <Route path="/billets" element={<Billets/>} />
+
+          <Route path="/affichagebillets" element={<AffichageBillets/>} />
 
         </Routes>
       </div>

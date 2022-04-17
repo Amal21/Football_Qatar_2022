@@ -1,17 +1,48 @@
 import React, { useEffect, useState } from "react";
 import authHeader from "../services/auth-header";
 import http from "../http-common";
+import Stripe from "react-stripe-checkout";
+import axios from "axios";
 
 
 const Billets = () => {
-
-
 
     const [dataApi , setDataApi] = useState([])
 
     const [dataApiPartie , setDataApiPartie] = useState([])
 
     const user = JSON.parse(localStorage.getItem('user'));
+
+    console.log(user.accessToken)
+
+    
+
+
+    async function handleToken(token) {
+       
+
+        await axios
+          .post("http://localhost:8091/api/payment/charge", "", {
+            headers: {      
+              Authorization: `Bearer ${user.accessToken}`,
+              token: token.id,
+              amount: 500,
+            },
+          })
+          .then(() => {
+            alert("Paiement effectué avec succès !");
+          })
+          .catch((error) => {
+            alert(error);
+          });
+
+          window.location.reload();
+      }
+    
+
+
+
+   
 
 
     const initialBilletState = {
@@ -145,7 +176,19 @@ const Billets = () => {
             <br></br>
 
             <div className="alert alert-success" role="alert">
-                <h5>Réservation effectué avec succès !</h5>
+                <h6>Réservation effectué avec succès !</h6>
+
+
+            </div>
+            <div  style={{textAlign: "center"}}>
+            
+
+            
+            <Stripe
+            stripeKey="pk_test_51KoDUhFslqXZA62tjLT35NVePOu1LjFbX4s6KHta91EK23Lwt8CjkTQLwxVEz7z4qkdIYbuacv28eQxHdLdO1Ppt00KfPs5wVv"
+            token={handleToken}
+            /> 
+            
             </div>
 
 
@@ -223,7 +266,7 @@ const Billets = () => {
           
 
 
-            <button onClick={saveBillet} className="btn btn-primary btn-lg btn-block"> Réserver</button>
+            <button onClick={saveBillet} className="btn btn-secondary btn-lg btn-block"> Réserver</button>
 
             </form>
            
